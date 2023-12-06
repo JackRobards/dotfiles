@@ -1,0 +1,38 @@
+#!/bin/zsh
+#
+# .zsh_plugins.txt - antidote plugins file
+#
+
+### Regular Plugins
+agkozak/zsh-z
+
+
+### Framework Plugins
+# Be careful with their inter-dependencies!
+# oh-my-zsh
+ohmyzsh/ohmyzsh path:lib/clipboard.zsh
+ohmyzsh/ohmyzsh path:plugins/copyfile
+ohmyzsh/ohmyzsh path:plugins/copypath
+ohmyzsh/ohmyzsh path:plugins/extract
+
+# zsh-utils
+belak/zsh-utils path:history
+belak/zsh-utils path:utility
+belak/zsh-utils path:editor
+
+### Prompt
+romkatv/powerlevel10k kind:fpath
+
+### Deferred Plugins
+zsh-users/zsh-syntax-highlighting kind:defer
+zdharma-continuum/fast-syntax-highlighting kind:defer
+
+
+### Completions
+zsh-users/zsh-completions path:src kind:fpath
+# belak/zsh-utils path:completion
+mattmc3/zephyr path:plugins/completion
+
+### Final Plugins
+zsh-users/zsh-autosuggestions kind:defer
+zsh-users/zsh-history-substring-search kind:defer

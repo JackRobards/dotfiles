@@ -1,0 +1,105 @@
+[alias]
+	co = checkout
+	s = status
+	d = diff
+	ac = !git add -A && git commit -av -m
+	b = branch
+
+	# https://stackoverflow.com/questions/7726949/remove-tracking-branches-no-longer-on-remote/38404202#38404202
+	cleanbranches = !"git fetch -p && git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -d"
+
+	# https://stackoverflow.com/a/7532131
+	apply-gitignore = !git ls-files -ci --exclude-standard -z | xargs -0 git rm --cached
+
+	# Clone a repository including all submodules
+	clone = clone --recursive
+
+	# Show verbose output about tags, branches or remotes
+        tags = tag -l
+        branches = branch -a
+	remotes = remote -v
+
+	# List aliases
+	aliases = config --get-regexp alias
+
+	# Amend the currently staged files to the latest commit
+        amend = commit --amend --reuse-message=HEAD
+
+[core]
+	pager = delta
+	editor = vim
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+
+	# Make `git rebase` safer on macOS
+        # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+	trustctime = false
+
+	# Prevent showing files whose names contain non-ASCII symbols as unversioned.
+        # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+        precomposeunicode = false
+
+	# Speed up commands involving untracked files such as `git status`.
+        # https://git-scm.com/docs/git-update-index#_untracked_cache
+        untrackedCache = true
+
+[user]
+	email = jrobards2@gmail.com
+	name = Jack Robards
+[help]
+	# Automatically correct and execute mistyped commands
+        autocorrect = 1
+[merge]
+
+        # Include summaries of merged commits in newly created merge commit messages
+        log = true
+
+[interactive]
+	diffFilter = delta --color-only --features=interactive
+
+[delta]
+	navigate = true
+	features = side-by-side line-numbers hyperlinks decorations
+	syntax-theme = Dracula
+	plus-style = "syntax #003800"
+	minus-style = "syntax #3f0001"
+
+[delta "interactive"]
+	keep-plus-minus-markers = false
+
+[delta "decorations"]
+	commit-decoration-style = bold yellow box ol
+	file-style = bold yellow ul
+	file-decoration-style = none
+	hunk-header-decoration-style = cyan box ul
+	hunk-header-file-style = red
+	hunk-header-line-number-style = "#067a00"
+	hunk-header-style = file line-number syntax
+
+[pull]
+	rebase = true
+
+[merge]
+	conflictstyle = diff3
+
+[pager]
+	diff = delta
+	log = delta
+	reflog = delta
+	show = delta
+
+[diff]
+	colorMoved = default
+	guitool = vscode
+
+[difftool "vscode"]
+	cmd = code --wait --diff $LOCAL $REMOTE
+
+[merge "npm-merge-driver"]
+	name = automatically merge npm lockfiles
+	driver = npx npm-merge-driver merge %A %O %B %P
+[merge "yarn-merge-driver"]
+	name = automatically merge npm lockfiles
+	driver = npx npm-merge-driver merge %A %O %B %P -c yarn
+[init]
+	defaultBranch = main
