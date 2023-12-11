@@ -1,0 +1,10 @@
+{{- if eq .chezmoi.os "darwin" }}
+Host *
+	AddKeysToAgent yes
+	UseKeychain yes
+{{- end }}
+
+Host github.com
+	User git
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/jrobards2_github

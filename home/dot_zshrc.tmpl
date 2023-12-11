@@ -21,11 +21,17 @@ alias ls="ls -A --color"
 alias grep="grep --color=auto"
 alias exa="exa --all --icons --color"
 alias tree="exa --tree"
-alias cat="bat"
 alias python="python3"
 alias j="z"
 alias pbcopy="clipcopy"
 alias pbpaste="clippaste"
+
+{{- if lookPath "bat" }}
+alias cat=bat
+{{- else if lookPath "batcat" }}
+alias cat=batcat
+alias bat=batcat
+{{- end }}
 
 # Environment Variables
 export GIT_SSH=$(which ssh)
